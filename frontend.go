@@ -43,7 +43,7 @@ func handleSearch(w http.ResponseWriter, req *http.Request) { // HL
 
 	// Run the Google search.
 	start := time.Now()
-	results, err := google.Search(query) // HL
+	results, err := google.SearchReplicated(query, 80 * time.Millisecond) // HL
 	elapsed := time.Since(start)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
